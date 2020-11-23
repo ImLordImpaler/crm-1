@@ -2,8 +2,55 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from .models import Enquiry , Product , Employee
 from .forms import ProductForm , EnquiryForm , EmployeForm
+from django.contrib.auth import login , logout , authenticate
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
+
+def loginPage(request):
+    if request.method == 'POST':
+        uname = request.POST.get('uname')
+        pwd = request.POST.get('pwd')
+
+        user = authenticate(username=uname , password = pwd)
+
+        if user is not None:
+            login(request , user)
+            return redirect('dashboard')
+        else:
+            return HttpResponse("Kon hai bai tu")
+    else :
+        pass
+
+    return render(request , 'basic/login.html')
+
+def register(request):
+    f = UserCreationForm()
+    if request.method == 'POST':
+        f = UserCreationForm(request.POST)
+        if f.is_valid():
+            f.save()
+            
+            return redirect('dashboard')
+        else:
+            return HttpResponse("Kuch missing hai")
+
+    else:
+        f = UserCreationForm()
+
+
+        
+
+    return render(request, 'basic/register.html', {'form': f})
+    
+     
+
+
+def logoutPage(request):
+    logout(request)
+    return redirect('loginPage')
+@login_required(login_url='loginPage')
 def home(request):
     enq = Enquiry.objects.all()
     
@@ -16,7 +63,7 @@ def home(request):
     return render(request , 'basic/dashboard.html' , params)
 
 
-
+@login_required(login_url='loginPage')
 def enquiry(request):
     enq = Enquiry.objects.all()
     form = EnquiryForm()
@@ -24,6 +71,7 @@ def enquiry(request):
         form = EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
+
             return redirect('dashboard')
         else :
             return HttpResponse('<h3> Try again </h3>')
@@ -35,7 +83,7 @@ def enquiry(request):
     }
 
     return render(request , 'basic/enquiry.html' , params)
-
+@login_required(login_url='loginPage')
 def enquiryUpdate(request , pk):
     enq = Enquiry.objects.get(id = pk)
     
@@ -54,7 +102,7 @@ def enquiryUpdate(request , pk):
     return render(request , 'basic/enquiryForm.html' , params)
 
 
-
+@login_required(login_url='loginPage')
 def product(request):
     enq = Product.objects.all()
     form = EnquiryForm()
@@ -75,7 +123,7 @@ def product(request):
     return render(request , 'basic/product.html' , params)
     
 
-
+@login_required(login_url='loginPage')
 def productEnquiry(request , pk):
     enq = Product.objects.get(id = pk)
     
@@ -92,7 +140,7 @@ def productEnquiry(request , pk):
         'form' : form
     }
     return render(request , 'basic/productForm.html' , params)
-
+@login_required(login_url='loginPage')
 def employee(request):
     emp = Employee.objects.all()
     if request.method == 'POST':
@@ -109,7 +157,7 @@ def employee(request):
         'pro': emp
     }
     return render(request , 'basic/employee.html' , params)
-
+@login_required(login_url='loginPage')
 def employeeUpdate(request , pk):
     enq = Employee.objects.get(id = pk)
     
@@ -126,20 +174,20 @@ def employeeUpdate(request , pk):
         'form' : form
     }
     return render(request , 'basic/empForm.html' , params)
-
+@login_required(login_url='loginPage')
 def stock(request):
     pro = Product.objects.all()
     params = {
         'stock': pro
     }
     return render(request , 'basic/album.html' , params)
-
+@login_required(login_url='loginPage')
 def clients(request):
     params = {
 
     }
     return render(request , 'basic/clients.html' , params)
-
+@login_required(login_url='loginPage')
 def deleteEmployee(request , pk):
     Emp = Employee.objects.get(id=pk)
     if request.method == 'POST':
@@ -152,7 +200,7 @@ def deleteEmployee(request , pk):
     }
 
     return render(request, 'basic/deleteEmployee.html' , params)
-
+@login_required(login_url='loginPage')
 def deleteProduct(request , pk):
     pro = Product.objects.get(id=pk)
     if request.method=='POST':
@@ -162,7 +210,7 @@ def deleteProduct(request , pk):
         'item': pro
     }
     return render(request , 'basic/deleteProduct.html' , params)
-
+@login_required(login_url='loginPage')
 def deleteEnquiry(request , pk):
     pro = Enquiry.objects.get(id=pk)
     if request.method=='POST':
@@ -171,4 +219,4 @@ def deleteEnquiry(request , pk):
     params = {
         'item': pro
     }
-    return render(request , 'basic/deleteEnquiry.html' , params)
+    return render(request , 'basic/deleteEnquiry.html' , params )

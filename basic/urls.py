@@ -19,6 +19,11 @@ urlpatterns = [
     path('deleteEmployee/<str:pk>/', views.deleteEmployee , name = 'deleteEmployee'),
     path('deleteProduct/<str:pk>/', views.deleteProduct , name = 'productDelete'),
     path('deleteEnquiry/<str:pk>/', views.deleteEnquiry , name = 'enquiryDelete'),
+
+    #auth
+    path('login' , views.loginPage , name='loginPage'),
+    path('register' , views.register , name='register'),
+    path('logout' , views.logoutPage , name='logoutPage')
    
     
 

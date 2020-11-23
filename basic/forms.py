@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from basic.models import Product , Enquiry , Employee
 
 
+
 class ProductForm(ModelForm):
     class Meta:
         model = Product

@@ -1,4 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
+
+class Customer(models.Model):
+    name= models.CharField(max_length=100 , null=True , blank=True)
+    age = models.IntegerField(default=10)
+    phone = models.CharField(max_length=10 , blank=True , null=True)
+    email = models.EmailField(max_length=100 , blank=True , null=True)
+    root = models.OneToOneField(User , on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 # Services LIST OF SERVICES
 GENDER_TYPES = [
