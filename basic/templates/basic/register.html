@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -34,31 +35,21 @@
     <link href="{% static 'signin.css' %}" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin">
-  <img class="mb-4" src="https://cdn1.iconfinder.com/data/icons/symbols-symbols-2-add-on-vol-2/48/v-36-512.png" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Help yourself</h1>
-  
-    <form action='' method='post' class=''> {% csrf_token %}
+    <form class="form-signin" action='' method='POST'>{% csrf_token %}
+      <img class="mb-4" src="https://cdn1.iconfinder.com/data/icons/symbols-symbols-2-add-on-vol-2/48/v-36-512.png" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      {{form.username.label}}
+      {{form.username}}
+      
+      {{form.email.label}}
+      {{form.email}}
 
-        {{form.username.label}}
-        {{form.username}}
+      {{form.password1.label}}
+      {{form.password1}}
 
-       
-
-        {{form.password1.label}}
-
-        {{form.password1}}
-        
-        {{form.password2.label}}
-
-        {{form.password2}}
-
-        
-        
-    
-  </div>
-    <a href="{% url 'register' %}" class="btn btn-lg btn-primary btn-block">Signup?</a>
-    </form>
+      {{form.password2.label}}
+      {{form.password2}}
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
 </form>
 </body>

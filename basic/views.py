@@ -1,9 +1,10 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from .models import Enquiry , Product , Employee
-from .forms import ProductForm , EnquiryForm , EmployeForm
+from .forms import ProductForm , EnquiryForm , EmployeForm , SignUpForm
 from django.contrib.auth import login , logout , authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
@@ -26,23 +27,25 @@ def loginPage(request):
     return render(request , 'basic/login.html')
 
 def register(request):
-    f = UserCreationForm()
-    if request.method == 'POST':
-        f = UserCreationForm(request.POST)
-        if f.is_valid():
-            f.save()
-            
+    form = SignUpForm()
+    if request.method=='POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
             return redirect('dashboard')
         else:
-            return HttpResponse("Kuch missing hai")
+            return HttpResponse("Nai hua bhau")
+    else :
+        form = SignUpForm()
+    params = {
+    'form': form
+    }
 
-    else:
-        f = UserCreationForm()
-
-
-        
-
-    return render(request, 'basic/register.html', {'form': f})
+    return render(request , 'basic/register.html' , params )
     
      
 
