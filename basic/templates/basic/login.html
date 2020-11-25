@@ -30,25 +30,47 @@
           font-size: 3.5rem;
         }
       }
+      body{
+        background-image: url(https://wallpapercave.com/wp/wp6771310.jpg)
+          
+      }
     </style>
     <!-- Custom styles for this template -->
     <link href="{% static 'signin.css' %}" rel="stylesheet">
   </head>
+
   <body class="text-center">
-    <form class="form-signin" action='' method='POST'>{% csrf_token %}
-  <img class="mb-4" src="https://cdn1.iconfinder.com/data/icons/symbols-symbols-2-add-on-vol-2/48/v-36-512.png" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    
+    <form class="form-signin formArea" action='' method='POST'>{% csrf_token %}
+   <img class="my-4 " src="https://cdn1.iconfinder.com/data/icons/symbols-symbols-2-add-on-vol-2/48/v-36-512.png" alt="" width="100" height="100">
+ <br><br>
   <label for="inputEmail" class="sr-only">Username</label>
   <input type="text" name='uname'id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+  <br>
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password"name='pwd' id="inputPassword" class="form-control" placeholder="Password" required>
   <div class="checkbox mb-3">
-    <label>
-      <a href="{% url 'register' %}" class='btn btn-primary' >Register</a>
-    </label>
+    
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+  <button class="btn btn-lg btn-dark btn-block " type="submit">Sign in</button> <br>
+  <label>
+      <a href="{% url 'register' %}" class='btn btn-outline-dark ' >Register?</a>
+    </label>
+  
 </form>
 </body>
+
+<style>
+.formArea{
+  border: 1px solid black;
+  box-shadow: 2px 1px;
+  border-radius: 50px 20px;
+  background-color: white;
+}
+
+.firstHeading{
+    font-color:
+    
+}
+</style>
 </html>

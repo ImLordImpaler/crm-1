@@ -1,7 +1,8 @@
 from django.urls import path , include
 from . import views
 urlpatterns = [
-    path('', views.home , name='dashboard'),
+    path('', views.cover , name='cover'),
+    path('dashboard' , views.home , name='dashboard'),
     path('product'  ,views.product , name='product'),
     path('enquiry' , views.enquiry , name='enquiry'),
     path('employee'  , views.employee , name='employee'),

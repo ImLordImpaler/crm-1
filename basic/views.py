@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
+def cover(request):
+    return render(request , 'basic/cover.html')
+
 def loginPage(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')

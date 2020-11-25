@@ -29,7 +29,7 @@
       
         <div class='row mt-5'>
           <div class='col-sm-6'>
-                <table class="table table-dark enquiryTable">
+                <table class="table table-danger enquiryTable">
                   <h4>Enquires</h4>
                   <thead>
                     <tr>
@@ -56,12 +56,12 @@
                   
                 </table>
                 
-                  <a href = "{% url 'enquiry' %}" class='btn btn-sm btn-outline-info'>View More?</a>
+                  <a href = "{% url 'enquiry' %}" class='btn btn-sm btn-primary'>View More?</a>
                 
                 
           </div>
           <div class='col-sm-6'>
-                <table class="table table-dark enquiryTable">
+                <table class="table table-danger enquiryTable">
                   <h4>Products (low in stock)</h4>
                   <thead>
                     <tr>
@@ -80,16 +80,16 @@
                       <th scope="row">{{i.id}}</th>
                       <td>{{i.name}}</td>
                       <td>{{i.quantity}}</td>
-                      <td>{{i.price}}</td>
+                      <td>{{i.bprice}}</td>
                       <td>{{i.category}}</td>
                     </tr>
                     {% endfor %}
                   </tbody>
                 </table>
-                <a href = "{% url 'product' %}" class='btn btn-sm btn-outline-info'>View More?</a>
+                <a href = "{% url 'product' %}" class='btn btn-sm btn-primary'>View More?</a>
           </div>
         </div>
     </main>
-
-    
+  <style>
+     
 {% endblock content %}
