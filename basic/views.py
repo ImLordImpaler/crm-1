@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='loginPage')
 def cover(request):
     return render(request , 'basic/cover.html')
 
